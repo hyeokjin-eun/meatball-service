@@ -1,0 +1,30 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: gatewayservice
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      enabled: true
+    gateway:
+      routes:
+        - id: example_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/exampleservice/**
+          filters:
+            - RewritePath=/exampleservice/(?<path>.*),/$\{path}
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
