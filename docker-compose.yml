@@ -1,0 +1,23 @@
+version: '2'
+services:
+  eurekaserver:
+    image: eurekaserver:0.1
+    ports:
+      - "8761:8761"
+  configserver:
+    image: configserver:0.1
+    ports:
+      - "8888:8888"
+    environment:
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT: 8761
+  gatewayserver:
+    image: gatewayserver:0.1
+    ports:
+      - "5000:5000"
+    environment:
+      SERVER_PORT: "5000"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      CONFIGSERVER_PORT: "8888"

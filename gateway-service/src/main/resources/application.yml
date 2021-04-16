@@ -19,7 +19,6 @@ spring:
           filters:
             - RewritePath=/exampleservice/(?<path>.*),/$\{path}
 
-
 eureka:
   instance:
     preferIpAddress: true
