@@ -1,4 +1,4 @@
-# <center> Config Server </center>
+# <center> Gateway Server </center>
 ## 목차
 * [소개](#소개)
 * [스펙](#스펙)
@@ -8,17 +8,19 @@
 * [실행](#실행)
 
 ## 소개
-Meatball Microservice Config Server Module
+Meatball Microservice Gateway Server Module
 
 ## 스펙
 * [Maven](https://mvnrepository.com/)
 * [Java 8](https://docs.oracle.com/javase/8/docs/api/)
 * [Spring Boot 2.4](https://spring.io/projects/spring-boot)
-* [Spring Cloud Eureka Client](https://spring.io/projects/spring-cloud-netflix)
-* [Spring Cloud Config Server](https://spring.io/projects/spring-cloud-config)
+* [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway)
+* [Spring Cloud Config Client](https://spring.io/projects/spring-cloud-config)
 
 ## 할일
-* Docker Maven Plugin 연결
+* Security Logic 개발
+* Filter Logic 개발
+* Log Logic 개발
 
 ## 설치
   * Java Install
@@ -53,11 +55,11 @@ Meatball Microservice Config Server Module
   ```console
     $ cd PROJECT_HOME
     $ mvn clean package
-    $ docekr build -t configserver:0.1 .
+    $ docekr build -t gatewayserver:0.1 .
   ```
 
 ## 실행
   ```console
     $ cd PROJECT_HOME
-    $ docker run -d configserver:0.1
+    $ docker run -d gatewayserver:0.1
   ```
