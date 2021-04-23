@@ -52,7 +52,7 @@ Meatball Microservice Eureka Server Module
   ```console
     $ cd PROJECT_HOME
     $ mvn clean package
-    $ docekr build -t eurekaserver:0.1 .
+    $ docker build -t eurekaserver:0.1 .
   ```
 
 ## 실행

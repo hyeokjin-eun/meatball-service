@@ -53,7 +53,7 @@ Meatball Microservice Config Server Module
   ```console
     $ cd PROJECT_HOME
     $ mvn clean package
-    $ docekr build -t configserver:0.1 .
+    $ docker build -t configserver:0.1 .
   ```
 
 ## 실행

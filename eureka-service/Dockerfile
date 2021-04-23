@@ -1,8 +1,7 @@
-FROM openjdk:8-jdk-alpine
-RUN  apk update && apk upgrade && apk add netcat-openbsd
+FROM maven:3.3-jdk-8
 RUN mkdir -p /usr/local/eurekaserver
-ARG JAR_FILE=target/*.jar
-ADD ${JAR_FILE} /usr/local/eurekaserver
-ADD run.sh run.sh
-RUN chmod +x run.sh
+WORKDIR /usr/local/eurekaserver
+ADD ./ ./
+RUN chmod +x ./run.sh
+CMD mvn clean package
 CMD ./run.sh
