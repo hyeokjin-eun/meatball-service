@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   eurekaserver:
     image: eurekaserver:0.1
@@ -8,16 +8,20 @@ services:
     image: configserver:0.1
     ports:
       - "28888:8888"
+    depends_on:
+      - eurekaserver
     environment:
-      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-      EUREKASERVER_PORT: 8761
+      EUREKASERVER_URI: "http://eurekaserver:28761/eureka/"
+      EUREKASERVER_PORT: 28761
   gatewayserver:
     image: gatewayserver:0.1
     ports:
       - "25000:5000"
+    depends_on:
+      - eurekaserver
     environment:
       SERVER_PORT: "5000"
-      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-      EUREKASERVER_PORT: "8761"
-      CONFIGSERVER_URI: "http://configserver:8888"
-      CONFIGSERVER_PORT: "8888"
+      EUREKASERVER_URI: "http://eurekaserver:28761/eureka/"
+      EUREKASERVER_PORT: "28761"
+      CONFIGSERVER_URI: "http://configserver:28888"
+      CONFIGSERVER_PORT: "28888"
