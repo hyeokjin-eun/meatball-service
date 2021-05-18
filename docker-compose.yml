@@ -10,7 +10,7 @@ services:
       - "28888:8888"
     environment:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-      EUREKASERVER_PORT: 8761
+      EUREKASERVER_PORT: "8761"
   gatewayserver:
     image: gatewayserver:0.1
     ports:
@@ -21,3 +21,21 @@ services:
       EUREKASERVER_PORT: "8761"
       CONFIGSERVER_URI: "http://configserver:8888"
       CONFIGSERVER_PORT: "8888"
+  exhibitserver:
+    image: exhibitserver:0.1
+    ports:
+      - "28083:8083"
+    environment:
+      SERVER_PORT: "8083"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      CONFIGSERVER_PORT: "8888"
+  swaggerserver:
+    image: swaggerserver:0.1
+    ports:
+      - "28085:8085"
+    environment:
+      SERVER_PORT: "8085"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT: "8761"

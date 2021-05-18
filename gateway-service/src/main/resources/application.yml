@@ -12,18 +12,25 @@ spring:
       enabled: true
     gateway:
       routes:
-        - id: example_route
-          uri: http://localhost:8081
+        - id: exhibit_route
+          uri: http://exhibitserver:8083
           predicates:
-            - Path=/exampleservice/**
+            - Path=/exhibitservice/**
+        - id: swagger_route
+          uri: http://swaggerserver:8085
+          predicates:
+            - Path=/swaggerservice/**
           filters:
-            - RewritePath=/exampleservice/(?<path>.*),/$\{path}
+            - RewritePath=/swaggerservice/(?<path>.*),/$\{path}
+      discovery:
+        locator:
+          enabled: false
 
 eureka:
   instance:
-    preferIpAddress: true
+    prefer-ip-address: true
   client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:28761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eurekaserver:8761/eureka/

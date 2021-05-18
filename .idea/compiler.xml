@@ -9,15 +9,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-service" />
         <module name="config-service" />
-        <module name="zuul-service" />
+        <module name="exhibit-service" />
         <module name="meatball" />
         <module name="gateway-service" />
+        <module name="swagger-service" />
+        <module name="zuul-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="example" target="1.8" />
       <module name="example-service" target="1.8" />
-      <module name="exhibit-service" target="1.8" />
       <module name="zuul-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -26,7 +27,9 @@
       <module name="config-service" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
       <module name="example-service" options="-parameters" />
+      <module name="exhibit-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
+      <module name="swagger-service" options="-parameters" />
       <module name="zuul-service" options="-parameters" />
     </option>
   </component>
