@@ -115,7 +115,7 @@ public class ExhibitService {
         String[] searchWord = {"피자", "토스트", "부추전", "스테이크", "만두"};
         List<PopularSearchWordResponseDto> popularSearchWordList = new ArrayList<>();
         for (String word : searchWord) {
-            int randomNum = MathUtil.randomNumber(3);
+            int randomNum = MathUtil.randomNumber(3) + 1;
             List<SearchWordRelationRecipeResponseDto> searchWordRelationRecipeList = new ArrayList<>();
             for (int i = 0; i < randomNum; i++) {
                 searchWordRelationRecipeList.add(SearchWordRelationRecipeResponseDto.builder()
