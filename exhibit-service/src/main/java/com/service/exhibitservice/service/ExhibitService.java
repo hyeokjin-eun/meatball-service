@@ -114,17 +114,23 @@ public class ExhibitService {
         //TODO Redis 등을 이용해서 인기 검색어 만들지 확인 필요 (일단은 임시 데이터 작성)
         String[] searchWord = {"피자", "토스트", "부추전", "스테이크", "만두"};
         List<PopularSearchWordResponseDto> popularSearchWordList = new ArrayList<>();
+
         for (String word : searchWord) {
             int randomNum = MathUtil.randomNumber(3) + 1;
             List<SearchWordRelationRecipeResponseDto> searchWordRelationRecipeList = new ArrayList<>();
+            int count = 1;
             for (int i = 0; i < randomNum; i++) {
                 searchWordRelationRecipeList.add(SearchWordRelationRecipeResponseDto.builder()
+                        .recipeId((long) count)
                         .imgPath("http://temp.com/temp/image")
                         .cookingTime(((randomNum + 1) * 10) + "분")
                         .ease(StringUtil.intConvertRecipeEaseEnum(randomNum))
                         .isScrap("N")
                         .build());
+                
+                count++;
             }
+
 
             popularSearchWordList.add(PopularSearchWordResponseDto.builder()
                     .searchWord(word)
