@@ -33,7 +33,7 @@ public class ExhibitService {
      * 시간별 레시피 추천 데이터
      * @return ResponseEntity<UserTimeRecommendRecipeResponseDto>
      */
-    public ResponseEntity<UserTimeRecommendResponseDto> getUserTimeRecommendRecipe() {
+    public UserTimeRecommendResponseDto getUserTimeRecommendRecipe() {
         //TODO 사용자 데이터 처리 부분 신규 작성 필요
         String[] categoryTemp = {"#라면", "#불닭볶음면", "#볶음밥", "#치킨", "#떡볶이"};
         UserTimeRecommendCategoryResponseDto userTimeRecommendCategoryResponseDto = UserTimeRecommendCategoryResponseDto.builder()
@@ -56,17 +56,17 @@ public class ExhibitService {
                     .build());
         }
 
-        return ResponseEntity.ok(UserTimeRecommendResponseDto.builder()
+        return UserTimeRecommendResponseDto.builder()
                 .userTimeRecommendCategory(userTimeRecommendCategoryResponseDto)
                 .userTimeRecommendRecipeList(userTimeRecommendRecipeResponseDtoList)
-                .build());
+                .build();
     }
 
     /**
      * 매주 지정된 레시피 10개 (이번주 도전 요리)
      * @return ResponseEntity<List<WeeklyChallengeRecipeResponseDto>>
      */
-    public ResponseEntity<List<WeeklyChallengeRecipeResponseDto>> getWeeklyChallengeRecipe() {
+    public List<WeeklyChallengeRecipeResponseDto> getWeeklyChallengeRecipe() {
         //TODO 스크랩 부분 처리 필요
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("created").descending());
         List<WeeklyChallengeRecipeResponseDto> weeklyChallengeRecipeList = weekChallengeRepository.findAll(pageRequest).getContent().stream()
@@ -81,14 +81,14 @@ public class ExhibitService {
                             .build())
                     .collect(Collectors.toList());
 
-        return ResponseEntity.ok(weeklyChallengeRecipeList);
+        return weeklyChallengeRecipeList;
     }
 
     /**
      * 주간 스크랩이 가장 많았던 레시피 10개 (이번주 베스트 레시피)
      * @return ResponseEntity<List<WeeklyBestRecipeResponseDto>>
      */
-    public ResponseEntity<List<WeeklyBestRecipeResponseDto>> getWeeklyBestRecipe() {
+    public List<WeeklyBestRecipeResponseDto> getWeeklyBestRecipe() {
         //TODO 스크랩 부분 처리 필요
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("created").descending());
         List<WeeklyBestRecipeResponseDto> weeklyBestRecipeList = weekBestRecipeRepository.findAll(pageRequest).getContent().stream()
@@ -103,14 +103,14 @@ public class ExhibitService {
                         .build())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(weeklyBestRecipeList);
+        return weeklyBestRecipeList;
     }
 
     /**
      * 인기 검색어 (1분동안 음식 검색에서 많이 검색된 음식 1~5위 노출)
      * @return ResponseEntity<List<PopularSearchWordResponseDto>>
      */
-    public ResponseEntity<List<PopularSearchWordResponseDto>> getPopularSearchWord() {
+    public List<PopularSearchWordResponseDto> getPopularSearchWord() {
         //TODO Redis 등을 이용해서 인기 검색어 만들지 확인 필요 (일단은 임시 데이터 작성)
         String[] searchWord = {"피자", "토스트", "부추전", "스테이크", "만두"};
         List<PopularSearchWordResponseDto> popularSearchWordList = new ArrayList<>();
@@ -127,7 +127,7 @@ public class ExhibitService {
                         .ease(StringUtil.intConvertRecipeEaseEnum(randomNum))
                         .isScrap("N")
                         .build());
-                
+
                 count++;
             }
 
@@ -138,14 +138,14 @@ public class ExhibitService {
                     .build());
         }
 
-        return ResponseEntity.ok(popularSearchWordList);
+        return popularSearchWordList;
     }
 
     /**
      * 전체 레시피에서 스크랩 많은 순으로 10개 노출
      * @return ResponseEntity<List<RecommendRecipeResponseDto>>
      */
-    public ResponseEntity<List<RecommendRecipeResponseDto>> getRecommendRecipe() {
+    public List<RecommendRecipeResponseDto> getRecommendRecipe() {
         //TODO 스크랩 많은 순 적용 필요 (임시 데이터 작성)
         List<RecommendRecipeResponseDto> recommendRecipeResponseDtoList = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
@@ -161,8 +161,18 @@ public class ExhibitService {
                     .build());
         }
 
-        return ResponseEntity.ok(recommendRecipeResponseDtoList);
+        return recommendRecipeResponseDtoList;
     }
 
     //TODO 검색 기록 바탕으로 레시피 노출
+
+    public HomeIntegratedResponseDto getHomeIntegrated() {
+        return HomeIntegratedResponseDto.builder()
+                .userTimeRecommendRecipe(getUserTimeRecommendRecipe())
+                .weeklyChallengeRecipeList(getWeeklyChallengeRecipe())
+                .weeklyBestRecipeList(getWeeklyBestRecipe())
+                .popularSearchWordList(getPopularSearchWord())
+                .recommendRecipeList(getRecommendRecipe())
+                .build();
+    }
 }
