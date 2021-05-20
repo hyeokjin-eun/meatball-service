@@ -23,6 +23,8 @@ spring:
   cloud:
     config:
       enabled: false
+  mvc:
+    static-path-pattern: /static/**
 
 eureka:
   instance:

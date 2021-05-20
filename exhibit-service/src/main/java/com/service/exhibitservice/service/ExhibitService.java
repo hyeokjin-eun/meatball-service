@@ -7,7 +7,6 @@ import com.service.exhibitservice.util.MathUtil;
 import com.service.exhibitservice.util.StringUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class ExhibitService {
             userTimeRecommendRecipeResponseDtoList.add(UserTimeRecommendRecipeResponseDto.builder()
                     .recipeId((long) i)
                     .title("맛있는 레시피 " + i)
-                    .imgPath("http://temp.com/temp/image")
+                    .imgPath(StringUtil.tempRandomImgPath())
                     .ease(StringUtil.intConvertRecipeEaseEnum(randomNum))
                     .cookingTime(i * 10 + "분")
                     .registerName("요리사" + i)
@@ -69,7 +68,7 @@ public class ExhibitService {
     public List<WeeklyChallengeRecipeResponseDto> getWeeklyChallengeRecipe() {
         //TODO 스크랩 부분 처리 필요
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("created").descending());
-        List<WeeklyChallengeRecipeResponseDto> weeklyChallengeRecipeList = weekChallengeRepository.findAll(pageRequest).getContent().stream()
+        return weekChallengeRepository.findAll(pageRequest).getContent().stream()
                     .map(weekChallengeRecipe -> WeeklyChallengeRecipeResponseDto.builder()
                             .recipeId(weekChallengeRecipe.getRecipeId())
                             .title(weekChallengeRecipe.getTitle())
@@ -80,8 +79,6 @@ public class ExhibitService {
                             .isScrap("N")
                             .build())
                     .collect(Collectors.toList());
-
-        return weeklyChallengeRecipeList;
     }
 
     /**
@@ -91,7 +88,7 @@ public class ExhibitService {
     public List<WeeklyBestRecipeResponseDto> getWeeklyBestRecipe() {
         //TODO 스크랩 부분 처리 필요
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("created").descending());
-        List<WeeklyBestRecipeResponseDto> weeklyBestRecipeList = weekBestRecipeRepository.findAll(pageRequest).getContent().stream()
+        return weekBestRecipeRepository.findAll(pageRequest).getContent().stream()
                 .map(weekBestRecipe -> WeeklyBestRecipeResponseDto.builder()
                         .recipeId(weekBestRecipe.getRecipeId())
                         .title(weekBestRecipe.getTitle())
@@ -102,8 +99,6 @@ public class ExhibitService {
                         .isScrap("N")
                         .build())
                 .collect(Collectors.toList());
-
-        return weeklyBestRecipeList;
     }
 
     /**
@@ -122,7 +117,7 @@ public class ExhibitService {
             for (int i = 0; i < randomNum; i++) {
                 searchWordRelationRecipeList.add(SearchWordRelationRecipeResponseDto.builder()
                         .recipeId((long) count)
-                        .imgPath("http://temp.com/temp/image")
+                        .imgPath(StringUtil.tempRandomImgPath())
                         .cookingTime(((randomNum + 1) * 10) + "분")
                         .ease(StringUtil.intConvertRecipeEaseEnum(randomNum))
                         .isScrap("N")
@@ -153,7 +148,7 @@ public class ExhibitService {
             recommendRecipeResponseDtoList.add(RecommendRecipeResponseDto.builder()
                     .recipeId((long)i)
                     .title("맛있는 레시피" + i)
-                    .imgPath("http://temp.com/temp/image")
+                    .imgPath(StringUtil.tempRandomImgPath())
                     .registerName("맛장인" + i)
                     .ease(StringUtil.intConvertRecipeEaseEnum(randomNum))
                     .cookingTime((i + 1) * 10 + "")

@@ -16,6 +16,8 @@ spring:
           uri: http://exhibitserver:8083
           predicates:
             - Path=/exhibitservice/**
+          filters:
+            - RewritePath=/exhibitservice/(?<path>.*),/$\{path}
         - id: swagger_route
           uri: http://swaggerserver:8085
           predicates:
@@ -25,6 +27,11 @@ spring:
       discovery:
         locator:
           enabled: false
+      default-filters:
+        - name: DefaultFilter
+          args:
+            preLogger: true
+            postLogger: true
 
 eureka:
   instance:
