@@ -1,6 +1,6 @@
 package com.service.exhibitservice.service;
 
-import com.service.exhibitservice.model.dto.*;
+import com.service.exhibitservice.model.dto.exhibit.response.*;
 import com.service.exhibitservice.repository.WeekBestRecipeRepository;
 import com.service.exhibitservice.repository.WeekChallengeRecipeRepository;
 import com.service.exhibitservice.util.MathUtil;

@@ -1,4 +1,4 @@
-package com.service.exhibitservice.model.dto;
+package com.service.exhibitservice.model.dto.exhibit.response;
 
 import com.service.exhibitservice.model.enums.RecipeEaseEnum;
 import io.swagger.annotations.ApiModel;

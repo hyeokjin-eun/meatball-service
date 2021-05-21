@@ -1,4 +1,4 @@
-package com.service.exhibitservice.model.dto;
+package com.service.exhibitservice.model.dto.exhibit.response;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;

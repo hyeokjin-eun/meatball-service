@@ -1,16 +1,18 @@
-package com.service.exhibitservice.model.dto;
+package com.service.exhibitservice.model.dto.exhibit.response;
 
 import com.service.exhibitservice.model.enums.RecipeEaseEnum;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ToString
-public class UserTimeRecommendRecipeResponseDto {
+@ApiModel(value = "추천 레시피 Response Model")
+public class RecommendRecipeResponseDto {
 
     @ApiModelProperty(value = "레시피 식별자", required = true, notes = "현재 레피시 미연동")
     private Long recipeId;

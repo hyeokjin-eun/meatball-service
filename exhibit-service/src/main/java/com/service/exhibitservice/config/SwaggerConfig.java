@@ -41,7 +41,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("전시 서비스")
-                .description("API 가이드 문서 (임시 작성 파일 API 호출등은 POSTMAN 이용 업데이트 예정)")
+                .description("API 가이드 문서")
                 .version("1.0.0")
                 .build();
     }

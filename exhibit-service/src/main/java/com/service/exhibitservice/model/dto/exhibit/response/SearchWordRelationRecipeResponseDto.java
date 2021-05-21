@@ -1,30 +1,22 @@
-package com.service.exhibitservice.model.dto;
+package com.service.exhibitservice.model.dto.exhibit.response;
 
 import com.service.exhibitservice.model.enums.RecipeEaseEnum;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @ToString
-@ApiModel(value = "추천 레시피 Response Model")
-public class RecommendRecipeResponseDto {
+public class SearchWordRelationRecipeResponseDto {
 
     @ApiModelProperty(value = "레시피 식별자", required = true, notes = "현재 레피시 미연동")
     private Long recipeId;
 
-    @ApiModelProperty(value = "제목", required = true)
-    private String title;
-
     @ApiModelProperty(value = "이미지 URL", required = true, notes = "해당값 아직 미정으로 기본 이미지로 작업 요청")
     private String imgPath;
-
-    @ApiModelProperty(value = "등록자", required = true)
-    private String registerName;
 
     @ApiModelProperty(value = "난이도", required = true, allowableValues = "EASY, MODERATE, HARD")
     private RecipeEaseEnum ease;
