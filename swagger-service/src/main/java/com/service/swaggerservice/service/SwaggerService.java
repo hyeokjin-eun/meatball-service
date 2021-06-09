@@ -30,7 +30,7 @@ public class SwaggerService {
             if (instanceInfos != null && !instanceInfos.isEmpty()) {
                 InstanceInfo instanceInfo = instanceInfos.get(0);
                 if (!SwaggerUtil.isSwaggerService(instanceInfo.getAppName())) {
-                    InstanceFeign instanceFeign = (InstanceFeign) FeignConfig.feignBuilder(InstanceFeign.class, "http://" + instanceInfo.getVIPAddress() + ":" + instanceInfo.getPort());
+                    InstanceFeign instanceFeign = (InstanceFeign) FeignConfig.feignBuilder(InstanceFeign.class, instanceInfo.getVIPAddress());
                     String result = ObjectUtil.objectConvertJson(instanceFeign.getSwaggerJson());
                     serviceDefinitionsContext.addServiceDefinition(instanceInfo.getAppName(), result);
                 }
