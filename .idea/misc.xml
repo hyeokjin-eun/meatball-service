@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/config-service/pom.xml" />
         <option value="$PROJECT_DIR$/exhibit-service/pom.xml" />
         <option value="$PROJECT_DIR$/swagger-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ingredient-service/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,6 @@
+FROM openjdk:8-jdk-alpine
+RUN mkdir -p /usr/local/gatewayserver
+WORKDIR /usr/local/gatewayserver
+ADD ./target/gateway-service-0.0.1-SNAPSHOT.jar ./
+EXPOSE 5005
+## ENTRYPOINT ["java", "-jar", "/usr/local/gatewayserver/target/*.jar"]

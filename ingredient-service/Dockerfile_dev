@@ -1,0 +1,6 @@
+FROM openjdk:8-jdk-alpine
+RUN mkdir -p /usr/local/ingredientserver
+WORKDIR /usr/local/ingredientserver
+ADD ./target/ingredient-service-0.0.1-SNAPSHOT.jar ./
+EXPOSE 5005
+## ENTRYPOINT ["java", "-jar", "/usr/local/exhibitserver/target/*.jar"]

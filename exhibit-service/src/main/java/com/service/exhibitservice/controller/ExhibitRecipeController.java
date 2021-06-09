@@ -7,10 +7,7 @@ import com.service.exhibitservice.service.ExhibitRecipeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(value = "전시 레시피 연관 API")
@@ -24,7 +21,7 @@ public class ExhibitRecipeController {
 
     @PostMapping("scrap/recipe")
     @ApiOperation(value = "스크랩 생성", notes = "스크랩 생성 API")
-    public ResponseEntity<ScrapCreateResponseDto> createScrap(ScrapCreateRequestDto scrapCreateRequestDto) {
+    public ResponseEntity<ScrapCreateResponseDto> createScrap(@RequestBody ScrapCreateRequestDto scrapCreateRequestDto) {
         return ResponseEntity.ok(exhibitRecipeService.createScrap(scrapCreateRequestDto));
     }
 

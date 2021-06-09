@@ -11,9 +11,8 @@ spring:
 eureka:
   instance:
     preferIpAddress: true
-    non-secure-port: 28085
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:28761/eureka/
+      defaultZone: http://eurekaserver:8761/eureka/

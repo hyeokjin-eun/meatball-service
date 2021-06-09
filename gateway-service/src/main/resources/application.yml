@@ -8,8 +8,6 @@ spring:
     active:
       default
   cloud:
-    config:
-      enabled: true
     gateway:
       routes:
         - id: exhibit_route
@@ -17,6 +15,10 @@ spring:
           predicates:
             - Path=/exhibitservice/**
           filters:
+            - name: AuthFilter
+              args:
+                preLogger: false
+                postLogger: false
             - RewritePath=/exhibitservice/(?<path>.*),/$\{path}
         - id: swagger_route
           uri: http://swaggerserver:8085
@@ -24,14 +26,16 @@ spring:
             - Path=/swaggerservice/**
           filters:
             - RewritePath=/swaggerservice/(?<path>.*),/$\{path}
-      discovery:
-        locator:
-          enabled: false
-      default-filters:
-        - name: DefaultFilter
-          args:
-            preLogger: true
-            postLogger: true
+        - id: ingredient_route
+          uri: http://ingredientserver:8086
+          predicates:
+            - Path=/ingredientservice/**
+          filters:
+            - name: AuthFilter
+              args:
+                preLogger: false
+                postLogger: false
+            - RewritePath=/exhibitservice/(?<path>.*),/$\{path}
 
 eureka:
   instance:

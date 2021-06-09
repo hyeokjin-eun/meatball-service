@@ -8,6 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-service" />
+        <module name="ingredient-service" />
+        <module name="meatball-service" />
         <module name="config-service" />
         <module name="exhibit-service" />
         <module name="meatball" />
@@ -19,6 +21,7 @@
     <bytecodeTargetLevel>
       <module name="example" target="1.8" />
       <module name="example-service" target="1.8" />
+      <module name="wrapper" target="1.5" />
       <module name="zuul-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -29,6 +32,7 @@
       <module name="example-service" options="-parameters" />
       <module name="exhibit-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
+      <module name="ingredient-service" options="-parameters" />
       <module name="swagger-service" options="-parameters" />
       <module name="zuul-service" options="-parameters" />
     </option>

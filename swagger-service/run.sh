@@ -11,4 +11,5 @@ echo "********************************************************"
 java -Djava.security.egd=file:/dev/./urandom -Dserver.port=$SERVER_PORT \
      -Deureka.client.serviceUrl.defaultZone=$EUREKASERVER_URI \
      -Dspring.profiles.active=$PROFILE \
+     -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=28085 \
      -jar /usr/local/swaggerserver/target/*.jar

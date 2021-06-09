@@ -1,0 +1,62 @@
+version: '3'
+services:
+  eurekaserver:
+    build:
+      context: ./eureka-service
+      dockerfile: Dockerfile_dev
+    ports:
+      - "28761:8761"
+    mem_limit: "300m"
+  configserver:
+    build:
+      context: ./config-service
+      dockerfile: Dockerfile_dev
+    ports:
+      - "28888:8888"
+    depends_on:
+      - eurekaserver
+    mem_limit: "300m"
+  gatewayserver:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile_dev
+    ports:
+      - "25000:5000"
+      - "25006:5005"
+    depends_on:
+      - eurekaserver
+    mem_limit: "300m"
+    command: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005", "-jar", "/usr/local/gatewayserver/gateway-service-0.0.1-SNAPSHOT.jar"]
+  exhibitserver:
+    build:
+      context: ./exhibit-service
+      dockerfile: Dockerfile_dev
+    ports:
+      - "28083:8083"
+      - "25003:5005"
+    mem_limit: "300m"
+    depends_on:
+      - eurekaserver
+    command: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005", "-jar", "/usr/local/exhibitserver/exhibit-service-0.0.1-SNAPSHOT.jar"]
+  swaggerserver:
+    build:
+      context: ./swagger-service
+      dockerfile: Dockerfile_dev
+    ports:
+      - "28085:8085"
+      - "25005:5005"
+    depends_on:
+      - eurekaserver
+    mem_limit: "300m"
+    command: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005", "-jar", "/usr/local/swaggerserver/swagger-service-0.0.1-SNAPSHOT.jar"]
+  ingredientserver:
+    build:
+      context: ./ingredient-service
+      dockerfile: Dockerfile_dev
+    ports:
+      - "28086:8086"
+      - "25007:5005"
+    depends_on:
+      - eurekaserver
+    mem_limit: "300m"
+    command: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005", "-jar", "/usr/local/ingredientserver/ingredient-service-0.0.1-SNAPSHOT.jar"]
