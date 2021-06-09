@@ -21,7 +21,7 @@ public class IngredientController {
 
     @GetMapping("Ingredients")
     @ApiOperation(value = "재료 검색", notes = "재료 검색 API")
-    public ResponseEntity<CollectionModel<IngredientListResponseDto>> Ingredients(@RequestBody IngredientListRequestDto ingredientListRequestDto) {
+    public ResponseEntity<CollectionModel<IngredientListResponseDto>> Ingredients(IngredientListRequestDto ingredientListRequestDto) {
         return ResponseEntity.ok(ingredientService.Ingredients(ingredientListRequestDto));
     }
 }
