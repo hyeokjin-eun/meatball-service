@@ -39,7 +39,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("전시 서비스")
+                .title("재료 서비스")
                 .description("API 가이드 문서")
                 .version("1.0.0")
                 .build();
