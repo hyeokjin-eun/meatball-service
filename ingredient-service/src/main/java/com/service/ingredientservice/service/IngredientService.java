@@ -1,9 +1,12 @@
 package com.service.ingredientservice.service;
 
 import com.service.ingredientservice.model.dto.ingredient.assemble.IngredientListAssemble;
+import com.service.ingredientservice.model.dto.ingredient.assemble.IngredientUnitListAssemble;
 import com.service.ingredientservice.model.dto.ingredient.request.IngredientListRequestDto;
 import com.service.ingredientservice.model.dto.ingredient.response.IngredientListResponseDto;
+import com.service.ingredientservice.model.dto.ingredient.response.IngredientUnitListResponseDto;
 import com.service.ingredientservice.repository.IngredientRepository;
+import com.service.ingredientservice.repository.UnitRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +18,20 @@ public class IngredientService {
 
     private final IngredientRepository ingredientRepository;
 
+    private final UnitRepository unitRepository;
+
     private final IngredientListAssemble ingredientListAssemble;
 
-    public IngredientService(IngredientRepository ingredientRepository, IngredientListAssemble ingredientListAssemble) {
+    private final IngredientUnitListAssemble ingredientUnitListAssemble;
+
+    public IngredientService(IngredientRepository ingredientRepository, UnitRepository unitRepository, IngredientListAssemble ingredientListAssemble, IngredientUnitListAssemble ingredientUnitListAssemble) {
         this.ingredientRepository = ingredientRepository;
+        this.unitRepository = unitRepository;
         this.ingredientListAssemble = ingredientListAssemble;
+        this.ingredientUnitListAssemble = ingredientUnitListAssemble;
     }
 
-    public CollectionModel<IngredientListResponseDto> Ingredients(IngredientListRequestDto ingredientListRequestDto) {
+    public CollectionModel<IngredientListResponseDto> ingredients(IngredientListRequestDto ingredientListRequestDto) {
         List<IngredientListResponseDto> listRequestDtoList;
         if (ingredientListRequestDto != null && ingredientListRequestDto.getSearchWord() != null) {
             listRequestDtoList = ingredientRepository.findByNameContains(ingredientListRequestDto.getSearchWord()).stream()
@@ -50,5 +59,15 @@ public class IngredientService {
         }
 
         return ingredientListAssemble.toCollectionModel(listRequestDtoList);
+    }
+
+    public CollectionModel<IngredientUnitListResponseDto> ingredientsUnits() {
+        return ingredientUnitListAssemble.toCollectionModel(unitRepository.findAll().stream()
+                .map(unit -> IngredientUnitListResponseDto.builder()
+                        .seq(unit.getSeq())
+                        .code(unit.getCode())
+                        .name(unit.getName())
+                        .build())
+                .collect(Collectors.toList()));
     }
 }

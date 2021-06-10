@@ -12,6 +12,6 @@ import lombok.*;
 @ApiModel(value = "재료 검색 Request Model")
 public class IngredientListRequestDto {
 
-    @ApiModelProperty(value = "검색 키워드", required = true)
+    @ApiModelProperty(value = "검색 키워드")
     private String searchWord;
 }
