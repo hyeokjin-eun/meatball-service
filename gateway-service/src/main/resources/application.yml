@@ -36,6 +36,25 @@ spring:
                 preLogger: false
                 postLogger: false
             - RewritePath=/ingredientservice/(?<path>.*),/$\{path}
+        - id: oauth_route
+          uri: http://oAuthServer:8080
+          predicates:
+            - Path=/auth/**
+          filters:
+            - name: AuthFilter
+              args:
+                preLogger: false
+                postLogger: false
+            - RewritePath=/auth/(?<path>.*),/$\{path}
+        - id: cooker_route
+          uri: http://cooker:3000
+          predicates:
+            - Path=/cooker/**
+          filters:
+            - name: AuthFilter
+              args:
+                preLogger: false
+                postLogger: false
 
 eureka:
   instance:
